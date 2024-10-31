@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hubees.hubeesnotification" >
+
+    <uses-sdk android:minSdkVersion="22" />
+
+    <application>
+        <receiver
+            android:name="com.hubees.hubeesnotification.NotificationReceiver"
+            android:exported="true" />
+    </application>
+
+</manifest>

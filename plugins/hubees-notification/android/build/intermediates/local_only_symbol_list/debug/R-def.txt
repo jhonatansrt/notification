@@ -1,0 +1,13 @@
+R_DEF: Internal format may change without notice
+local
+drawable hubees
+id arrival_time_label
+id button_close
+id notification_details
+id notification_remaining_time
+id notification_time_end
+id notification_time_start
+id progressBar
+id remaining_time_label
+layout custom_notification_layout_large
+layout custom_notification_layout_small

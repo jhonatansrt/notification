@@ -1,0 +1,47 @@
+{
+  "api": {
+    "name": "HubeesNotificationPlugin",
+    "slug": "hubeesnotificationplugin",
+    "docs": "",
+    "tags": [],
+    "methods": [
+      {
+        "name": "sendNotification",
+        "signature": "(options: { timeStart: string; timeEnd: string; remainingTime: string; details: string; arrivalTime: string; progress: number; }) => Promise<{ success: boolean; }>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ timeStart: string; timeEnd: string; remainingTime: string; details: string; arrivalTime: string; progress: number; }"
+          }
+        ],
+        "returns": "Promise<{ success: boolean; }>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "sendnotification"
+      },
+      {
+        "name": "updateNotification",
+        "signature": "(options: { timeStart: string; timeEnd: string; remainingTime: string; details: string; arrivalTime: string; progress: number; }) => Promise<{ success: boolean; }>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ timeStart: string; timeEnd: string; remainingTime: string; details: string; arrivalTime: string; progress: number; }"
+          }
+        ],
+        "returns": "Promise<{ success: boolean; }>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "updatenotification"
+      }
+    ],
+    "properties": []
+  },
+  "interfaces": [],
+  "enums": [],
+  "typeAliases": [],
+  "pluginConfigs": []
+}
