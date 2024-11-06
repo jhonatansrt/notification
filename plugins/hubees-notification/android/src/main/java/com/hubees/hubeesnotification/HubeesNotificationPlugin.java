@@ -4,6 +4,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.Intent;
 import android.os.Build;
 import android.widget.RemoteViews;
@@ -34,25 +35,35 @@ public class HubeesNotificationPlugin extends Plugin {
     }
 
     @PluginMethod
+    public void isNotificationClosed(PluginCall call) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("NotificationPrefs", Context.MODE_PRIVATE);
+        boolean isClosed = sharedPreferences.getBoolean("notificationClosed", false);
+
+        JSObject ret = new JSObject();
+        ret.put("notificationClosed", isClosed);
+        call.resolve(ret);
+    }
+
+    @PluginMethod
     public void sendNotification(PluginCall call) {
-        String timeStart = call.getString("timeStart");
-        String timeEnd = call.getString("timeEnd");
         String remainingTime = call.getString("remainingTime");
         String details = call.getString("details");
         String arrivalTime = call.getString("arrivalTime");
         int progress = call.getInt("progress", 0);
+
+        // Redefine o valor de notificationClosed para false
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("NotificationPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("notificationClosed", false); // Redefine para false ao enviar a notificação
+        editor.apply();
 
         RemoteViews notificationLayoutSmall = new RemoteViews(getContext().getPackageName(), R.layout.custom_notification_layout_small);
 
         RemoteViews notificationLayoutLarge = new RemoteViews(getContext().getPackageName(), R.layout.custom_notification_layout_large);
 
         // Define os valores dinamicamente no layout
-        notificationLayoutSmall.setTextViewText(R.id.notification_time_start, timeStart);
-        notificationLayoutSmall.setTextViewText(R.id.notification_time_end, timeEnd);
         notificationLayoutSmall.setProgressBar(R.id.progressBar, 100, progress, false);
 
-        notificationLayoutLarge.setTextViewText(R.id.notification_time_start, timeStart);
-        notificationLayoutLarge.setTextViewText(R.id.notification_time_end, timeEnd);
         notificationLayoutLarge.setTextViewText(R.id.notification_remaining_time, remainingTime);
         notificationLayoutLarge.setTextViewText(R.id.notification_details, details);
         notificationLayoutLarge.setTextViewText(R.id.arrival_time_label, arrivalTime);
@@ -102,8 +113,6 @@ public class HubeesNotificationPlugin extends Plugin {
     @PluginMethod
     public void updateNotification(PluginCall call) {
         // Recupera os dados que você deseja atualizar
-        String timeStart = call.getString("timeStart");
-        String timeEnd = call.getString("timeEnd");
         String remainingTime = call.getString("remainingTime");
         String details = call.getString("details");
         String arrivalTime = call.getString("arrivalTime");
@@ -114,12 +123,8 @@ public class HubeesNotificationPlugin extends Plugin {
         RemoteViews notificationLayoutLarge = new RemoteViews(getContext().getPackageName(), R.layout.custom_notification_layout_large);
 
         // Atualiza os valores da notificação
-        notificationLayoutSmall.setTextViewText(R.id.notification_time_start, timeStart);
-        notificationLayoutSmall.setTextViewText(R.id.notification_time_end, timeEnd);
         notificationLayoutSmall.setProgressBar(R.id.progressBar, 100, progress, false);
 
-        notificationLayoutLarge.setTextViewText(R.id.notification_time_start, timeStart);
-        notificationLayoutLarge.setTextViewText(R.id.notification_time_end, timeEnd);
         notificationLayoutLarge.setTextViewText(R.id.notification_remaining_time, remainingTime);
         notificationLayoutLarge.setTextViewText(R.id.notification_details, details);
         notificationLayoutLarge.setTextViewText(R.id.arrival_time_label, arrivalTime);

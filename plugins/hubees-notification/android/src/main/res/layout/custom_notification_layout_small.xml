@@ -8,6 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="10sp"
+        android:text="0h00"
         android:textColor="#000000" />
 
     <TextView
@@ -16,6 +17,7 @@
         android:layout_height="wrap_content"
         android:textSize="10sp"
         android:textColor="#000000"
+        android:text="3h00"
         android:layout_alignParentEnd="true" />
 
     <!-- Barra de Progresso -->
