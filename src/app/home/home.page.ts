@@ -45,7 +45,7 @@ export class HomePage {
         await HubeesNotification.isNotificationClosed();
 
       if (notificationClosed) {
-        clearInterval(this.interval);
+        this.stopService();
         return;
       }
 

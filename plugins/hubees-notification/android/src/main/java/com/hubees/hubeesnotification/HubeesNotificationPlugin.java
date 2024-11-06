@@ -160,6 +160,8 @@ public class HubeesNotificationPlugin extends Plugin {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setShowWhen(false)
                 .setOngoing(true)
+                .setSound(null) // Desabilita o som
+                .setVibrate(new long[0]) // Desabilita a vibração
                 .setContentIntent(pendingIntent); // Define o PendingIntent para a ação de clique
 
         NotificationManager manager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
